@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Strength Checker 🔒</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+<div class="card">
+  <header>
+    <span class="lock-icon">🔒</span>
+    <h1>Password Strength Checker</h1>
+    <p class="subtitle">Real-time security analysis powered by entropy &amp; breach detection</p>
+  </header>
+
+  <!-- Input row -->
+  <div class="input-wrap">
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="Enter a password…"
+      autocomplete="new-password"
+      spellcheck="false"
+    />
+    <button id="toggleBtn" class="icon-btn" title="Show / hide password" aria-label="Toggle visibility">
+      <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        style="display:none">
+        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+        <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+        <line x1="1" y1="1" x2="23" y2="23"/>
+      </svg>
+    </button>
+    <button id="copyBtn" class="icon-btn" title="Copy password" aria-label="Copy">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Strength meter -->
+  <div class="meter-wrap" id="meterWrap" aria-hidden="true">
+    <div class="meter-bar" id="meterBar"></div>
+  </div>
+
+  <!-- Result badge -->
+  <div id="resultBadge" class="result-badge hidden"></div>
+
+  <!-- Stats row -->
+  <div id="statsRow" class="stats-row hidden">
+    <div class="stat">
+      <span class="stat-label">Entropy</span>
+      <span class="stat-value" id="statEntropy">—</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Crack Time</span>
+      <span class="stat-value" id="statCrack">—</span>
+    </div>
+    <div class="stat" id="pwnedStat" style="display:none">
+      <span class="stat-label">Breaches</span>
+      <span class="stat-value breach" id="statPwned">—</span>
+    </div>
+  </div>
+
+  <!-- Criteria checklist -->
+  <ul class="checklist" id="checklist">
+    <li data-key="length_8">At least 8 characters</li>
+    <li data-key="length_12">12+ characters (bonus)</li>
+    <li data-key="uppercase">Uppercase letter</li>
+    <li data-key="lowercase">Lowercase letter</li>
+    <li data-key="digit">Number</li>
+    <li data-key="special">Special character (!@#$…)</li>
+    <li data-key="no_repeat">No repeated characters (aaa)</li>
+    <li data-key="no_sequence">No sequential characters (123, abc)</li>
+    <li data-key="no_keyboard">No keyboard patterns (qwerty)</li>
+  </ul>
+
+  <!-- Tips -->
+  <div id="tipsBox" class="tips-box hidden">
+    <strong>💡 Suggestions</strong>
+    <ul id="tipsList"></ul>
+  </div>
+
+  <!-- History -->
+  {% if history %}
+  <div class="history-wrap">
+    <div class="history-header">
+      <span>Recent checks</span>
+      <button id="clearHistoryBtn" class="text-btn">Clear</button>
+    </div>
+    <ul class="history-list" id="historyList">
+      {% for item in history %}
+      <li>
+        <span class="hist-mask">{{ item.masked }}</span>
+        <span class="result-badge mini {{ item.color_class }}">{{ item.label }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
