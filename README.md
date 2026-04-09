@@ -42,7 +42,7 @@ A full-featured Flask web application for evaluating password security with real
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/wilsonnjoroge/password-checker.git
+git clone https://github.com/wilsonnjoroge/Password-Strength-Checker.git
 cd password-checker
 ```
 
