@@ -31,9 +31,25 @@ A full-featured Flask web application for evaluating password security with real
 
 ## 📸 Demo
 
-> Replace `screenshot.png` with your own screenshot of the app in action.
+- Screenshot for a very strong password
 
-![Demo Screenshot](screenshot.png)
+![Demo Screenshot](./screenshots/very-strong.png)
+
+- Screenshot for a strong password
+
+![Demo Screenshot](./screenshots/strong.png)
+
+- Screenshot for a medium strength password
+
+![Demo Screenshot](./screenshots/medium-strength.png)
+
+- Screenshot for a weak password
+
+![Demo Screenshot](./screenshots/weak-strength.png)
+
+- Screenshot for a very weak password
+
+![Demo Screenshot](./screenshots/very-weak-strength.png)
 
 ---
 
