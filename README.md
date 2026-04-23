@@ -159,4 +159,4 @@ password_checker_flask/
 
 ## 📄 License
 
-MIT License © 2026 [Wilson Njoroge Wanderi]
+MIT License © 2026 Wilson Njoroge Wanderi
